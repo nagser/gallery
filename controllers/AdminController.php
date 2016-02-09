@@ -1,77 +1,54 @@
 <?php
 
-namespace app\modules\gallery\controllers;
+namespace nagser\logger\controllers;
 
-use Yii;
-use app\base\CustomAdminController;
-use app\modules\gallery\models\GalleryRecord;
-use yii\helpers\Url;
-use yii\web\Response;
+use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
-/**
- * AdminController implements the CRUD actions for GalleryRecord model.
- */
-class AdminController extends CustomAdminController
+class AdminController extends \nagser\base\controllers\AdminController
 {
 
-    public function actionUpload($id = null)
-    {
-        /** @var GalleryRecord $recordModel * */
-        if ($id) {
-            $recordModel = $this->findRecordModel($id);
-        } else {
-            $recordModel = new $this->recordModel;
-        }
-        $recordModel->scenario = 'upload';
-        if (Yii::$app->request->post()) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return [
-                'files' => [
+    public function behaviors(){
+        return ArrayHelper::merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
                     [
-                        'url' => "http://yii.scriptogenius.com/themes/absoluteadmin/preview.png",
-                        'thumbnail_url' => "http://yii.scriptogenius.com/themes/absoluteadmin/preview.png",
-                        'name' => "preview.png",
-                        'type' => "image/png",
-                        'size' => 46353,
-                        'delete_url' => Url::to(['delete-file']),
-                        'delete_type' => "DELETE"
+                        'actions' => ['index', 'select2-list'],
+                        'allow' => true,
+                        'roles' => ['logger-admin-index'],
                     ],
-                ]
-            ];
-        } else {
-            if (Yii::$app->request->isAjax) {
-                return $this->renderAjax('upload', [
-                    'recordModel' => $recordModel,
-                ]);
-            } else {
-                return $this->render('upload', [
-                    'recordModel' => $recordModel,
-                ]);
-            }
-        }
-//        if ($recordModel->load(Yii::$app->request->post()) and $recordModel->save()) {
-//            if (Yii::$app->request->isAjax) {
-//                Yii::$app->response->format = Response::FORMAT_JSON;
-//                return [
-//                    'id' => $recordModel->id,
-//                    'type' => $recordModel->type,
-//                    'author_id' => $recordModel->author_id,
-//                    'content' => $recordModel->content,
-//                ];
-//            } else {
-//                $this->redirect(['update', 'id' => $recordModel->id]);
-//            }
-//        } else {
-//            if (Yii::$app->request->isAjax) {
-//                return $this->renderAjax('upload', [
-//                    'recordModel' => $recordModel,
-//                ]);
-//            } else {
-//                return $this->render('upload', [
-//                    'recordModel' => $recordModel,
-//                ]);
-//            }
-//        }
+                    [
+                        'actions' => ['view'],
+                        'allow' => true,
+                        'roles' => ['logger-admin-view'],
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['logger-admin-delete'],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Геттер для модели
+     * @return string
+     * */
+    protected function getModel()
+    {
+        return ArrayHelper::getValue($this->module->modelMap, 'LoggerModel');
+    }
+
+    /**
+     * Геттер для поисковой модели
+     * @return string
+     * */
+    protected function getModelSearch()
+    {
+        return ArrayHelper::getValue($this->module->modelMap, 'LoggerSearch');
     }
 
 }

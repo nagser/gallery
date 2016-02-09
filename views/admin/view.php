@@ -1,48 +1,48 @@
 <?php
 
-use yii\helpers\Html;
-use app\base\widgets\DetailView\AdminDetailView;
+use nagser\base\widgets\DetailView\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\gallery\models\GalleryRecord */
+/* @var $model nagser\logger\models\LoggerRecord */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gallery', 'Gallery Records'), 'url' => ['index']];
+$this->title = ucfirst($model->category);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('logger', 'Logs list'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="gallery-record-view">
 
-<!--
-    <p>
-        <?= Html::a(Yii::t('gallery', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('gallery', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger jsDialog',
-            'data' => [
-			    'data-modal-type' => 'confirm',
-			    'data-modal-class' => 'danger',
-                'data-message' => Yii::t('yii', 'Are you sure you want to delete this item?')
+<div class="logger-model-view">
+
+	<?= DetailView::widget([
+		'model' => $model,
+		'attributes' => [
+            [
+                'label' => Yii::t('logger', 'Id'),
+                'attribute' => 'id',
             ],
-        ]) ?>
-    </p>
--->
-    <?= AdminDetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'module',
-            'model',
-            'model_id',
-            'type',
-            'title',
-            'description:ntext',
-            'content:ntext',
-            'direct_access',
-            'author_id',
-            'is_main',
-            'position',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
+            [
+                'label' => Yii::t('logger', 'Category'),
+                'attribute' => 'category',
+            ],
+            [
+                'label' => Yii::t('logger', 'Level'),
+                'attribute' => 'level',
+            ],
+            [
+                'label' => Yii::t('logger', 'Log time'),
+                'attribute' => 'log_time',
+                'format' => 'datetime',
+            ],
+            [
+                'label' => Yii::t('logger', 'Prefix'),
+                'attribute' => 'prefix',
+            ],
+            [
+                'label' => Yii::t('logger', 'Message'),
+                'attribute' => 'message',
+				'valueColOptions' => ['style' => 'word-break: break-all;'],
+				'format' => 'ntext'
+            ],
+		],
+	]) ?>
 
 </div>

@@ -1,12 +1,12 @@
 {
-    "name": "nagser/gallery",
+    "name": "nagser/logger",
     "type": "yii2-extension",
 
-    "description": "Managing uploaded files",
+    "description": "This module display logger information from database in GridView interface",
     "keywords": ["nagser"],
     "license": "GPL-3.0+",
     "support": {
-        "source": "https://github.com/nagser/gallery"
+        "source": "https://github.com/nagser/logger"
     },
     "authors": [
         {
@@ -22,10 +22,10 @@
 
     "autoload": {
         "psr-4": {
-            "nagser\\gallery\\": ""
+            "nagser\\logger\\": ""
         }
     },
     "extra": {
-        "bootstrap": "nagser\\gallery\\Bootstrap"
+        "bootstrap": "nagser\\logger\\Bootstrap"
     }
 }

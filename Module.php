@@ -1,11 +1,15 @@
 <?php
 
-namespace app\modules\gallery;
+namespace nagser\logger;
 
-use app\base\CustomModule;
 
-class Module extends CustomModule {
+class Module extends \nagser\base\Module
+{
+	public $controllerNamespace = 'nagser\logger\controllers';
 
-    public $controllerNamespace = 'app\modules\gallery\controllers';
-
+	public function init()
+	{
+		parent::init();
+		// custom initialization code goes here
+	}
 }
