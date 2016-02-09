@@ -1,70 +1,121 @@
 <?php
 
-use nagser\base\widgets\GridView\GridView;
-/* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $modelSearch nagser\logger\models\LoggerSearch */
-/* @var $model nagser\logger\models\LoggerRecord */
 
-$this->title = Yii::t('logger', 'Logs list');
+/* @var $this yii\web\View */
+use nagser\base\widgets\GridView\GridView;
+
+/* @var $modelSearch nagser\gallery\models\GallerySearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = Yii::t('gallery', 'Gallery list');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="gallery-record-index">
 
-<div class="logger-record-index">
-	<?= GridView::widget([
-		'dataProvider' => $dataProvider,
-		'filterModel' => $modelSearch,
-		'columns' => [
-			[
-				'label' => Yii::t('logger', 'Id'),
-				'value' => 'id',
-				'attribute' => 'id',
-				'headerOptions' => [
-					'style' => 'width: 115px;',
-				],
-				'filterType' => GridView::FILTER_SELECT2,
-				'filterWidgetOptions' => [
-					'pluginOptions' => [
-						'ajax' => [
-							'colAlias' => 'id',
-						]
-					],
-				]
-			],
-			[
-				'label' => Yii::t('logger', 'Category'),
-				'value' => 'category',
-				'attribute' => 'category',
-				'filterType' => GridView::FILTER_SELECT2,
-				'filterWidgetOptions' => [
-					'pluginOptions' => [
-						'ajax' => [
-							'colAlias' => 'category'
-						]
-					],
-				]
-			],
-			[
-				'label' => Yii::t('logger', 'Level'),
-				'value' => 'level',
-				'attribute' => 'level',
-				'headerOptions' => [
-					'style' => 'width: 115px;',
-				],
-				'filterType' => GridView::FILTER_SELECT2,
-				'filterWidgetOptions' => [
-					'pluginOptions' => [
-						'ajax' => [
-							'colAlias' => 'level',
-						]
-					],
-				]
-			],
-			[
-				'class' => \nagser\base\widgets\ActionColumn\ActionColumn::className(),
-				'template' => '{view} {delete}',
-				'viewOptions' => ['class' => 'btn btn-sm btn-default jsOpen']
-			],
-		],
-	]); ?>
+    <p style="margin-bottom: 10px;"><?= \yii\bootstrap\Html::a(Yii::t('gallery', 'Upload file'), ['update'], ['class' => 'btn btn-default'])?></p>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $modelSearch,
+        'columns' => [
+            [
+                'label' => '#',
+                'value' => 'id',
+                'attribute' => 'id',
+                'headerOptions' => [
+                    'style' => 'width: 115px;',
+                ],
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'ajax' => [
+                            'colAlias' => 'id',
+                        ]
+                    ],
+                ]
+            ],
+            [
+                'label' => Yii::t('gallery', 'Title'),
+                'value' => 'title',
+                'attribute' => 'title',
+                'headerOptions' => [
+                    'style' => 'width: 115px;',
+                ],
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'ajax' => [
+                            'colAlias' => 'title',
+                        ]
+                    ],
+                ]
+            ],
+            [
+                'label' => Yii::t('gallery', 'Type'),
+                'value' => 'type',
+                'attribute' => 'type',
+                'headerOptions' => [
+                    'style' => 'width: 115px;',
+                ],
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'ajax' => [
+                            'colAlias' => 'type',
+                        ]
+                    ],
+                ]
+            ],
+            [
+                'label' => Yii::t('gallery', 'Author'),
+                'value' => 'author_id',
+                'attribute' => 'author_id',
+                'headerOptions' => [
+                    'style' => 'width: 115px;',
+                ],
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'ajax' => [
+                            'colAlias' => 'author_id',
+                        ]
+                    ],
+                ]
+            ],
+            [
+                'label' => Yii::t('gallery', 'Updated'),
+                'value' => 'updated_at',
+                'attribute' => 'updated_at',
+                'headerOptions' => [
+                    'style' => 'width: 115px;',
+                ],
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'ajax' => [
+                            'colAlias' => 'updated_at',
+                        ]
+                    ],
+                ]
+            ],
+            [
+                'label' => Yii::t('gallery', 'Created'),
+                'value' => 'created_at',
+                'attribute' => 'created_at',
+                'headerOptions' => [
+                    'style' => 'width: 115px;',
+                ],
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'ajax' => [
+                            'colAlias' => 'created_at',
+                        ]
+                    ],
+                ]
+            ],
+            ['class' => \nagser\base\widgets\ActionColumn\ActionColumn::className()],
+        ],
+    ]); ?>
+
 </div>

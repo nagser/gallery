@@ -1,48 +1,41 @@
 <?php
 
 use nagser\base\widgets\DetailView\DetailView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model nagser\logger\models\LoggerRecord */
+/* @var $model nagser\gallery\models\GalleryRecord */
 
-$this->title = ucfirst($model->category);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('logger', 'Logs list'), 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gallery', 'Gallery list'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="gallery-record-view">
 
-<div class="logger-model-view">
-
-	<?= DetailView::widget([
-		'model' => $model,
-		'attributes' => [
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'type',
+            'title',
+            'file',
             [
-                'label' => Yii::t('logger', 'Id'),
-                'attribute' => 'id',
+                'attribute' => 'author',
+                'value' => Html::a($model->author->profile->name, ['/user/admin/view', 'id' => $model->author->id]),
+                'label' => Yii::t('gallery', 'Author'),
+                'format' => 'html'
             ],
             [
-                'label' => Yii::t('logger', 'Category'),
-                'attribute' => 'category',
+                'attribute' => 'created_at',
+                'label' => Yii::t('gallery', 'Created'),
+                'format' => 'datetime'
             ],
             [
-                'label' => Yii::t('logger', 'Level'),
-                'attribute' => 'level',
+                'attribute' => 'updated_at',
+                'label' => Yii::t('gallery', 'Updated'),
+                'format' => 'datetime'
             ],
-            [
-                'label' => Yii::t('logger', 'Log time'),
-                'attribute' => 'log_time',
-                'format' => 'datetime',
-            ],
-            [
-                'label' => Yii::t('logger', 'Prefix'),
-                'attribute' => 'prefix',
-            ],
-            [
-                'label' => Yii::t('logger', 'Message'),
-                'attribute' => 'message',
-				'valueColOptions' => ['style' => 'word-break: break-all;'],
-				'format' => 'ntext'
-            ],
-		],
-	]) ?>
+        ],
+    ]) ?>
 
 </div>
