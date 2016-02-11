@@ -95,7 +95,7 @@ class GalleryRecord extends Model
             $file = $this->file;
             /** @var $file \yii\web\UploadedFile * */
 //            $file->saveAs(Yii::getAlias('@galleryOriginalPath') . '/' . $file->baseName . '.' . $file->extension);
-            Yii::$app->gallery->upload($file);
+//            Yii::$app->gallery->upload($file);
             $this->file = $file->baseName . '.' . $file->extension;
             $this->type = $file->type;
             return true;

@@ -31,4 +31,19 @@ class Module extends \nagser\base\Module {
      * */
     public $othersPath = '@uploads/gallery/others';
 
+    /**
+     * Максимальный размер загружаемого файла в байтах
+     * */
+    public $maxSize = 128000000;
+
+    /**
+     * Разрешения файлов для создания preview
+     * */
+    public $extPreview = ['png', 'jpeg', 'jpg', 'gif'];
+
+    /**
+     * Типы файлов для создания preview
+     * */
+    public $extTypes = ['image/gif', 'image/jpeg', 'image/png'];
+
 }

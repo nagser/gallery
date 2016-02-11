@@ -54,7 +54,7 @@ class AdminController extends \nagser\base\controllers\AdminController
             }
         } else {
             if (Yii::$app->request->isPost) {
-                $modelObject->file = UploadedFile::getInstance($modelObject, 'file');
+                $modelObject->file = Yii::$app->gallery->upload($modelObject);
                 if ($modelObject->upload() and $modelObject->scenario = 'save' and $modelObject->load(\Yii::$app->request->post()) and $modelObject->save()) {
                     $this->redirect(Url::to(['view', 'id' => $modelObject->id]));
                 }
